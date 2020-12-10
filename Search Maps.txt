@@ -1,0 +1,22 @@
+import sys
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+
+path = r"C:\Program Files (x86)\chromedriver.exe"
+driver = webdriver.Chrome(path)
+
+if len(sys.argv) > 1:
+    address = " ".join(sys.argv[1:])
+
+driver.get('https://www.google.com/maps/place/' + address)
+
+try:
+    search = driver.find_element_by_xpath("enter xpath of search box")
+    search.click()
+    search.send_keys(Keys.RETURN)
+    print("done")
+    time.sleep(5)
+    driver.close()
+except:
+    print("error")
